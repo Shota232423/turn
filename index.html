@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="style.css">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+            <div class="container-fluid">
+              <a class="navbar-brand text-light" href="#">順番シミュレーター</a>
+            </div>
+          </nav>
+        <div class="container mt-5">
+            <div class="row">
+                <div class="col-md-4 col-lg-3">
+        <input type="text" placeholder="名前を入力してください！" v-model="name" v-on:keyup.enter="add()" class="form-control" id="name1">
+        </div>
+    </div>
+        <button type="button" class="btn btn-primary mt-3" v-on:click="shuffle()">シャッフルする</button>
+        </div>
+       
+    <div class="card mt-5">
+        <ul class="list-group list-group-flush">
+            <transition-group>
+                <li v-for="item in items" :key="item" class="list-group-item">{{item}}</li>
+        </transition-group>
+        </ul>
+      </div>
+
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                items:[],
+                name:''
+            },
+            methods:{
+                add:function(){
+                    this.items.push(this.name);
+                    this.name='';
+                    console.log(this.items);
+                },
+                shuffle:function(){
+                    for(i = this.items.length - 1; i > 0; i--) {
+                        var j = Math.floor(Math.random() * (i + 1));
+                        var tmp = this.items[i];
+                        this.items.splice(i,1,this.items[j]);
+                        this.items.splice(j,1,tmp);
+                    }
+                    console.log(this.items);
+                }
+            }
+        })
+    </script>
+</body>
+</html>

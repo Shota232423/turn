@@ -1,0 +1,14 @@
+.box{
+    display: flex;
+    
+}
+.v-enter-active, .v-leave-active {
+    transition: all 500ms;
+  }
+  .v-move {
+    transition: all 700ms;
+  }
+  /* 表示アニメーション開始時 ・ 非表示アニメーション後 */
+  .v-enter, .v-leave-to {
+    opacity: 0;
+  }
